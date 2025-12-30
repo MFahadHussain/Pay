@@ -1,0 +1,551 @@
+   ▲ Next.js 15.3.5
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.18.224:3000
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 5.7s
+ ○ Compiling / ...
+ ✓ Compiled / in 5.5s (1044 modules)
+ GET / 200 in 6786ms
+ ○ Compiling /api/projects ...
+ ✓ Compiled /api/attendance in 6.2s (1069 modules)
+✓ Database connected successfully
+ GET /api/employees 200 in 4045ms
+ GET /api/projects 200 in 4053ms
+ GET /api/projects 200 in 5678ms
+ GET /api/attendance?date=2025-12-30 200 in 4060ms
+ GET /api/employees 200 in 39ms
+ GET /api/projects 200 in 19ms
+ ○ Compiling /api/assignments ...
+ ✓ Compiled /api/assignments in 778ms (1071 modules)
+✓ Database connected successfully
+ GET /api/assignments 200 in 864ms
+ GET /api/employees 200 in 866ms
+ GET /api/projects 200 in 868ms
+ GET /api/attendance?startDate=2025-12-01&endDate=2025-12-31 200 in 33ms
+ GET /api/employees 200 in 44ms
+ GET /api/projects 200 in 43ms
+ ○ Compiling /api/payroll ...
+ ✓ Compiled /api/payroll in 557ms (1073 modules)
+✓ Database connected successfully
+ GET /api/payroll?month=12&year=2025 200 in 619ms
+ GET /api/projects 200 in 621ms
+ GET /api/employees 200 in 625ms
+ ○ Compiling /api/social-charges/ledger ...
+ ✓ Compiled /api/social-charges/ledger in 510ms (1075 modules)
+✓ Database connected successfully
+ GET /api/employees 200 in 571ms
+ GET /api/projects 200 in 574ms
+ GET /api/social-charges/ledger?month=12&year=2025 200 in 578ms
+ ✓ Compiled /api/social-charges/payments in 385ms (1077 modules)
+✓ Database connected successfully
+ GET /api/social-charges/payments? 200 in 492ms
+ ○ Compiling /api/social-charges/ledger/[id] ...
+ ✓ Compiled /api/social-charges/ledger/[id] in 546ms (1079 modules)
+✓ Database connected successfully
+Error: Route "/api/social-charges/ledger/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at PATCH (src/app/api/social-charges/ledger/[id]/route.ts:41:9)
+  39 |   try {
+  40 |     // Validate params
+> 41 |     if (!params?.id) {
+     |         ^
+  42 |       return NextResponse.json({ error: 'Ledger entry ID is required' }, { status: 400 })
+  43 |     }
+  44 |
+Error: Route "/api/social-charges/ledger/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at PATCH (src/app/api/social-charges/ledger/[id]/route.ts:60:26)
+  58 |
+  59 |     const ledger = await db.socialChargesLedger.findUnique({
+> 60 |       where: { id: params.id }
+     |                          ^
+  61 |     })
+  62 |
+  63 |     if (!ledger) {
+✓ Database connected successfully
+Error: Route "/api/social-charges/ledger/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at PATCH (src/app/api/social-charges/ledger/[id]/route.ts:69:26)
+  67 |     // Update isPaid status
+  68 |     const updatedLedger = await db.socialChargesLedger.update({
+> 69 |       where: { id: params.id },
+     |                          ^
+  70 |       data: { isPaid: isPaid === true }
+  71 |     })
+  72 |
+ PATCH /api/social-charges/ledger/cmjstmo8p0060jgadl5iofsbm 200 in 2410ms
+Error: Route "/api/social-charges/ledger/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at PATCH (src/app/api/social-charges/ledger/[id]/route.ts:41:9)
+  39 |   try {
+  40 |     // Validate params
+> 41 |     if (!params?.id) {
+     |         ^
+  42 |       return NextResponse.json({ error: 'Ledger entry ID is required' }, { status: 400 })
+  43 |     }
+  44 |
+Error: Route "/api/social-charges/ledger/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at PATCH (src/app/api/social-charges/ledger/[id]/route.ts:60:26)
+  58 |
+  59 |     const ledger = await db.socialChargesLedger.findUnique({
+> 60 |       where: { id: params.id }
+     |                          ^
+  61 |     })
+  62 |
+  63 |     if (!ledger) {
+Error: Route "/api/social-charges/ledger/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at PATCH (src/app/api/social-charges/ledger/[id]/route.ts:69:26)
+  67 |     // Update isPaid status
+  68 |     const updatedLedger = await db.socialChargesLedger.update({
+> 69 |       where: { id: params.id },
+     |                          ^
+  70 |       data: { isPaid: isPaid === true }
+  71 |     })
+  72 |
+ PATCH /api/social-charges/ledger/cmjstmo8p0060jgadl5iofsbm 200 in 391ms
+ GET /api/social-charges/ledger?month=12&year=2025 200 in 133ms
+ GET /api/social-charges/payments? 200 in 105ms
+ GET /api/social-charges/ledger?month=12&year=2025 200 in 117ms
+ GET /api/social-charges/payments? 200 in 14ms
+✓ Database connected successfully
+ ✓ Compiled in 3.3s (516 modules)
+ GET / 200 in 281ms
+ GET /api/employees 200 in 34ms
+ GET /api/payroll?month=12&year=2023 200 in 60ms
+ GET /api/projects 200 in 64ms
+ GET /api/payroll?month=12&year=2025 200 in 17ms
+ GET /api/social-charges/ledger?month=12&year=2025 200 in 43ms
+ GET /api/employees 200 in 59ms
+ GET /api/projects 200 in 64ms
+ GET /api/social-charges/payments? 200 in 40ms
+ GET /api/employees 200 in 15ms
+ ✓ Compiled in 2s (1079 modules)
+ GET / 200 in 162ms
+✓ Database connected successfully
+ GET /api/employees 200 in 63ms
+ ✓ Compiled /api/payroll in 414ms (565 modules)
+ ✓ Compiled (567 modules)
+✓ Database connected successfully
+ GET /api/payroll?month=12&year=2025 200 in 785ms
+ GET /api/projects 200 in 788ms
+ POST /api/payroll 201 in 53ms
+ GET /api/payroll?month=12&year=2025 200 in 12ms
+ GET /api/employees 200 in 67ms
+ ✓ Compiled /api/social-charges/ledger in 301ms (569 modules)
+✓ Database connected successfully
+ GET /api/projects 200 in 492ms
+ GET /api/social-charges/ledger?month=12&year=2025 200 in 506ms
+ ✓ Compiled /api/social-charges/payments in 354ms (571 modules)
+✓ Database connected successfully
+ GET /api/social-charges/payments? 200 in 395ms
+ GET /api/payroll?month=12&year=2025 200 in 75ms
+ GET /api/employees 200 in 103ms
+ GET /api/projects 200 in 105ms
+ GET /api/employees 200 in 30ms
+ ✓ Compiled /api/attendance in 226ms (573 modules)
+✓ Database connected successfully
+ GET /api/projects 200 in 411ms
+ GET /api/attendance?startDate=2025-12-01&endDate=2025-12-31 200 in 425ms
+ POST /api/attendance 201 in 29ms
+ POST /api/attendance 201 in 31ms
+ POST /api/attendance 201 in 36ms
+ POST /api/attendance 201 in 41ms
+ GET /api/attendance?startDate=2025-12-01&endDate=2025-12-31 200 in 75ms
+ GET /api/projects 200 in 88ms
+ GET /api/employees 200 in 93ms
+ ✓ Compiled /api/assignments in 192ms (575 modules)
+✓ Database connected successfully
+ GET /api/projects 200 in 482ms
+ GET /api/employees 200 in 484ms
+ GET /api/assignments 200 in 489ms
+ GET /api/projects 200 in 13ms
+ GET /api/employees 200 in 24ms
+ ○ Compiling /api/employees/[id] ...
+ ✓ Compiled /api/employees/[id] in 1043ms (1093 modules)
+✓ Database connected successfully
+ GET / 200 in 350ms
+Error: Route "/api/employees/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at DELETE (src/app/api/employees/[id]/route.ts:67:26)
+  65 |   try {
+  66 |     await db.employee.delete({
+> 67 |       where: { id: params.id }
+     |                          ^
+  68 |     })
+  69 |
+  70 |     return NextResponse.json({ success: true })
+✓ Database connected successfully
+ DELETE /api/employees/cmjsvyzqw006zjgadqm6jwgh3 200 in 2893ms
+ GET /api/employees 200 in 47ms
+Error: Route "/api/employees/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at DELETE (src/app/api/employees/[id]/route.ts:67:26)
+  65 |   try {
+  66 |     await db.employee.delete({
+> 67 |       where: { id: params.id }
+     |                          ^
+  68 |     })
+  69 |
+  70 |     return NextResponse.json({ success: true })
+ DELETE /api/employees/cmjsvv2w4006yjgadwfcdp5n1 200 in 81ms
+ GET /api/employees 200 in 23ms
+✓ Database connected successfully
+Error: Route "/api/employees/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at DELETE (src/app/api/employees/[id]/route.ts:67:26)
+  65 |   try {
+  66 |     await db.employee.delete({
+> 67 |       where: { id: params.id }
+     |                          ^
+  68 |     })
+  69 |
+  70 |     return NextResponse.json({ success: true })
+ DELETE /api/employees/cmjsvs4dy0069jgad199uvuds 200 in 89ms
+ GET /api/employees 200 in 14ms
+✓ Database connected successfully
+ GET /api/social-charges/ledger?month=12&year=2025 200 in 23ms
+ GET /api/projects 200 in 41ms
+ GET /api/employees 200 in 47ms
+ GET /api/social-charges/payments? 200 in 14ms
+ GET /api/employees 200 in 11ms
+ GET /api/payroll?month=12&year=2023 200 in 29ms
+ GET /api/projects 200 in 32ms
+ GET /api/social-charges/ledger?month=12&year=2025 200 in 14ms
+ GET /api/employees 200 in 19ms
+ GET /api/projects 200 in 23ms
+ GET /api/social-charges/payments? 200 in 17ms
+ GET /api/attendance?startDate=2025-12-01&endDate=2025-12-31 200 in 59ms
+ GET /api/projects 200 in 160ms
+ GET /api/employees 200 in 166ms
+ GET /api/assignments 200 in 24ms
+ GET /api/projects 200 in 49ms
+ GET /api/employees 200 in 55ms
+ GET /api/attendance?startDate=2025-12-01&endDate=2025-12-31 200 in 23ms
+ GET /api/employees 200 in 38ms
+ GET /api/projects 200 in 46ms
+ GET /api/social-charges/ledger?month=12&year=2025 200 in 14ms
+ GET /api/projects 200 in 22ms
+ GET /api/employees 200 in 25ms
+ GET /api/social-charges/payments? 200 in 43ms
+ GET /api/employees 200 in 27ms
+ GET /api/payroll?month=12&year=2023 200 in 38ms
+ GET /api/projects 200 in 41ms
+ GET /api/attendance?startDate=2025-12-01&endDate=2025-12-31 200 in 31ms
+ GET /api/employees 200 in 45ms
+ GET /api/projects 200 in 48ms
+ GET /api/payroll?month=12&year=2025 200 in 19ms
+ GET /api/employees 200 in 30ms
+ GET /api/projects 200 in 32ms
+ ✓ Compiled in 1563ms (1085 modules)
+ GET / 200 in 208ms
+ ✓ Compiled in 494ms (516 modules)
+ GET / 200 in 181ms
+✓ Database connected successfully
+ GET /api/employees 200 in 175ms
+ GET /api/employees 200 in 16ms
+ GET /api/payroll?month=12&year=2025 200 in 47ms
+ GET /api/projects 200 in 51ms
+ ✓ Compiled /api/social-charges/ledger in 267ms (571 modules)
+✓ Database connected successfully
+ GET /api/employees 200 in 499ms
+ GET /api/social-charges/ledger?month=12&year=2025 200 in 502ms
+ GET /api/projects 200 in 506ms
+ ✓ Compiled /api/social-charges/payments in 238ms (573 modules)
+✓ Database connected successfully
+ GET /api/social-charges/payments? 200 in 321ms
+ GET /api/employees 200 in 38ms
+ GET /api/projects 200 in 97ms
+ GET /api/payroll?month=12&year=2025 200 in 136ms
+ GET /api/social-charges/ledger?month=12&year=2025 200 in 16ms
+ GET /api/projects 200 in 17ms
+ GET /api/employees 200 in 25ms
+ GET /api/social-charges/payments? 200 in 20ms
+ ✓ Compiled in 554ms (1089 modules)
+ GET / 200 in 139ms
+ GET / 200 in 441ms
+✓ Database connected successfully
+ GET /api/projects 200 in 69ms
+ GET /api/employees 200 in 82ms
+ GET /api/attendance?date=2025-12-30 200 in 85ms
+ GET /api/social-charges/ledger?month=12&year=2025 200 in 32ms
+ GET /api/projects 200 in 63ms
+ GET /api/employees 200 in 80ms
+ GET /api/social-charges/payments? 200 in 81ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ✓ Compiled in 1802ms (1089 modules)
+ GET / 200 in 1458ms
+✓ Database connected successfully
+ GET /api/employees 200 in 36ms
+ GET /api/projects 200 in 53ms
+ GET /api/attendance?date=2025-12-30 200 in 48ms
+ ✓ Compiled in 3.4s (1057 modules)
+ GET / 200 in 212ms
+ ✓ Compiled in 2.9s (1057 modules)
+ GET / 200 in 299ms
+ GET / 200 in 465ms
+ ✓ Compiled /api/attendance in 254ms (562 modules)
+ ✓ Compiled (566 modules)
+✓ Database connected successfully
+ GET /api/projects 200 in 991ms
+ GET /api/attendance?date=2025-12-30 200 in 856ms
+ GET /api/employees 200 in 1002ms
+ ○ Compiling /api/social-charges/ledger ...
+ ✓ Compiled /api/payroll in 901ms (568 modules)
+ ✓ Compiled (570 modules)
+✓ Database connected successfully
+ GET /api/employees 200 in 1885ms
+ GET /api/projects 200 in 1886ms
+ GET /api/social-charges/ledger?month=12&year=2025 200 in 1891ms
+ GET /api/payroll?month=12&year=2025 200 in 1347ms
+ GET /api/employees 200 in 36ms
+ ✓ Compiled /api/social-charges/payments in 404ms (572 modules)
+✓ Database connected successfully
+ GET /api/social-charges/ledger?month=12&year=2025 200 in 762ms
+ GET /api/projects 200 in 818ms
+ GET /api/social-charges/payments? 200 in 844ms
+ GET /api/employees 200 in 808ms
+ GET /api/projects 200 in 32ms
+ GET /api/social-charges/payments? 200 in 17ms
+ ✓ Compiled /api/social-charges/ledger/[id] in 472ms (562 modules)
+✓ Database connected successfully
+Error: Route "/api/social-charges/ledger/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at PATCH (src/app/api/social-charges/ledger/[id]/route.ts:41:9)
+  39 |   try {
+  40 |     // Validate params
+> 41 |     if (!params?.id) {
+     |         ^
+  42 |       return NextResponse.json({ error: 'Ledger entry ID is required' }, { status: 400 })
+  43 |     }
+  44 |
+Error: Route "/api/social-charges/ledger/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at PATCH (src/app/api/social-charges/ledger/[id]/route.ts:60:26)
+  58 |
+  59 |     const ledger = await db.socialChargesLedger.findUnique({
+> 60 |       where: { id: params.id }
+     |                          ^
+  61 |     })
+  62 |
+  63 |     if (!ledger) {
+Error: Route "/api/social-charges/ledger/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at PATCH (src/app/api/social-charges/ledger/[id]/route.ts:69:26)
+  67 |     // Update isPaid status
+  68 |     const updatedLedger = await db.socialChargesLedger.update({
+> 69 |       where: { id: params.id },
+     |                          ^
+  70 |       data: { isPaid: isPaid === true }
+  71 |     })
+  72 |
+ PATCH /api/social-charges/ledger/cmjstmo8p0060jgadl5iofsbm 200 in 1197ms
+Error: Route "/api/social-charges/ledger/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at PATCH (src/app/api/social-charges/ledger/[id]/route.ts:41:9)
+  39 |   try {
+  40 |     // Validate params
+> 41 |     if (!params?.id) {
+     |         ^
+  42 |       return NextResponse.json({ error: 'Ledger entry ID is required' }, { status: 400 })
+  43 |     }
+  44 |
+Error: Route "/api/social-charges/ledger/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at PATCH (src/app/api/social-charges/ledger/[id]/route.ts:60:26)
+  58 |
+  59 |     const ledger = await db.socialChargesLedger.findUnique({
+> 60 |       where: { id: params.id }
+     |                          ^
+  61 |     })
+  62 |
+  63 |     if (!ledger) {
+Error: Route "/api/social-charges/ledger/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at PATCH (src/app/api/social-charges/ledger/[id]/route.ts:69:26)
+  67 |     // Update isPaid status
+  68 |     const updatedLedger = await db.socialChargesLedger.update({
+> 69 |       where: { id: params.id },
+     |                          ^
+  70 |       data: { isPaid: isPaid === true }
+  71 |     })
+  72 |
+ GET / 200 in 1238ms
+ PATCH /api/social-charges/ledger/cmjstmo8p0060jgadl5iofsbm 200 in 561ms
+ ✓ Compiled /api/social-charges/ledger in 252ms (564 modules)
+✓ Database connected successfully
+ GET /api/social-charges/ledger?month=12&year=2025 200 in 861ms
+ GET /api/social-charges/ledger?month=12&year=2025 200 in 15ms
+ ✓ Compiled /api/social-charges/payments in 142ms (566 modules)
+✓ Database connected successfully
+✓ Database connected successfully
+ GET /api/social-charges/payments? 200 in 183ms
+ GET /api/social-charges/payments? 200 in 9ms
+ ✓ Compiled in 2s (1081 modules)
+✓ Database connected successfully
+Error: Route "/api/social-charges/ledger/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at PATCH (src/app/api/social-charges/ledger/[id]/route.ts:41:9)
+  39 |   try {
+  40 |     // Validate params
+> 41 |     if (!params?.id) {
+     |         ^
+  42 |       return NextResponse.json({ error: 'Ledger entry ID is required' }, { status: 400 })
+  43 |     }
+  44 |
+Error: Route "/api/social-charges/ledger/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at PATCH (src/app/api/social-charges/ledger/[id]/route.ts:60:26)
+  58 |
+  59 |     const ledger = await db.socialChargesLedger.findUnique({
+> 60 |       where: { id: params.id }
+     |                          ^
+  61 |     })
+  62 |
+  63 |     if (!ledger) {
+Error: Route "/api/social-charges/ledger/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at PATCH (src/app/api/social-charges/ledger/[id]/route.ts:69:26)
+  67 |     // Update isPaid status
+  68 |     const updatedLedger = await db.socialChargesLedger.update({
+> 69 |       where: { id: params.id },
+     |                          ^
+  70 |       data: { isPaid: isPaid === true }
+  71 |     })
+  72 |
+ ○ Compiling /api/projects ...
+ GET /api/social-charges/ledger?month=12&year=2025 200 in 670ms
+ PATCH /api/social-charges/ledger/cmjstmo8p0060jgadl5iofsbm 200 in 1473ms
+ ✓ Compiled /api/projects in 1840ms (568 modules)
+ ✓ Compiled (570 modules)
+✓ Database connected successfully
+✓ Database connected successfully
+ GET /api/social-charges/payments? 200 in 1821ms
+ GET /api/employees 200 in 2505ms
+ GET /api/projects 200 in 2507ms
+ GET /api/social-charges/ledger?month=12&year=2025 200 in 1677ms
+ GET / 200 in 2664ms
+ GET /api/social-charges/payments? 200 in 38ms
+ ✓ Compiled in 1395ms (1085 modules)
+ GET / 200 in 344ms
+✓ Database connected successfully
+ GET /api/social-charges/ledger?month=12&year=2025 200 in 41ms
+ GET /api/projects 200 in 73ms
+ GET /api/employees 200 in 77ms
+ GET /api/social-charges/payments? 200 in 20ms
+Error: Route "/api/social-charges/ledger/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at PATCH (src/app/api/social-charges/ledger/[id]/route.ts:41:9)
+  39 |   try {
+  40 |     // Validate params
+> 41 |     if (!params?.id) {
+     |         ^
+  42 |       return NextResponse.json({ error: 'Ledger entry ID is required' }, { status: 400 })
+  43 |     }
+  44 |
+Error: Route "/api/social-charges/ledger/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at PATCH (src/app/api/social-charges/ledger/[id]/route.ts:60:26)
+  58 |
+  59 |     const ledger = await db.socialChargesLedger.findUnique({
+> 60 |       where: { id: params.id }
+     |                          ^
+  61 |     })
+  62 |
+  63 |     if (!ledger) {
+Error: Route "/api/social-charges/ledger/[id]" used `params.id`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at PATCH (src/app/api/social-charges/ledger/[id]/route.ts:69:26)
+  67 |     // Update isPaid status
+  68 |     const updatedLedger = await db.socialChargesLedger.update({
+> 69 |       where: { id: params.id },
+     |                          ^
+  70 |       data: { isPaid: isPaid === true }
+  71 |     })
+  72 |
+ PATCH /api/social-charges/ledger/cmjstmo8p0060jgadl5iofsbm 200 in 635ms
+ GET /api/social-charges/ledger?month=12&year=2025 200 in 20ms
+ GET /api/social-charges/payments? 200 in 13ms
+✓ Database connected successfully
+ ✓ Compiled /api/attendance in 359ms (572 modules)
+✓ Database connected successfully
+ GET /api/projects 200 in 567ms
+ GET /api/attendance?startDate=2025-12-01&endDate=2025-12-31 200 in 570ms
+ GET /api/employees 200 in 572ms
+ ○ Compiling /api/payroll ...
+ ✓ Compiled /api/payroll in 574ms (574 modules)
+✓ Database connected successfully
+ GET /api/projects 200 in 896ms
+ GET /api/payroll?month=12&year=2025 200 in 900ms
+ GET /api/employees 200 in 901ms
+ POST /api/payroll 201 in 81ms
+ GET /api/payroll?month=12&year=2025 200 in 15ms
+ GET /api/social-charges/ledger?month=12&year=2025 200 in 15ms
+ GET /api/employees 200 in 20ms
+ GET /api/projects 200 in 21ms
+ GET /api/social-charges/payments? 200 in 16ms
+ GET /api/payroll?month=12&year=2025 200 in 13ms
+ GET /api/projects 200 in 38ms
+ GET /api/employees 200 in 44ms
+ ✓ Compiled in 1808ms (1089 modules)
+ GET / 200 in 150ms
+✓ Database connected successfully
+ GET /api/social-charges/ledger?month=12&year=2025 200 in 62ms
+ GET /api/employees 200 in 71ms
+ GET /api/projects 200 in 73ms
+ GET /api/social-charges/payments? 200 in 18ms
+ GET /api/payroll?month=12&year=2025 200 in 36ms
+ GET /api/employees 200 in 45ms
+ GET /api/projects 200 in 48ms
+ GET /api/social-charges/ledger?month=12&year=2025 200 in 41ms
+ GET /api/employees 200 in 59ms
+ GET /api/projects 200 in 67ms
+ GET /api/social-charges/payments? 200 in 88ms
+ GET /api/payroll?month=12&year=2025 200 in 16ms
+ GET /api/employees 200 in 19ms
+ GET /api/projects 200 in 28ms
+ GET /api/attendance?startDate=2025-12-01&endDate=2025-12-31 200 in 31ms
+ GET /api/projects 200 in 36ms
+ GET /api/employees 200 in 44ms
+ ✓ Compiled /api/assignments in 212ms (574 modules)
+✓ Database connected successfully
+ GET /api/projects 200 in 439ms
+ GET /api/employees 200 in 441ms
+ GET /api/assignments 200 in 447ms
+ GET /api/attendance?startDate=2025-12-01&endDate=2025-12-31 200 in 31ms
+ GET /api/employees 200 in 41ms
+ GET /api/projects 200 in 49ms
+ ✓ Compiled in 2.1s (1089 modules)
+ GET / 200 in 290ms
+ ✓ Compiled in 550ms (1089 modules)
+ GET / 200 in 96ms
+ ✓ Compiled in 948ms (1089 modules)
+ GET / 200 in 423ms
+ ✓ Compiled in 1089ms (1089 modules)
+ GET / 200 in 258ms
+ ✓ Compiled in 740ms (1089 modules)
+ GET / 200 in 91ms
+ ✓ Compiled in 1788ms (1057 modules)
+ GET / 200 in 337ms
+ ✓ Compiled in 704ms (1057 modules)
+ GET / 200 in 114ms
+ ✓ Compiled in 439ms (1057 modules)
+ GET / 200 in 95ms
+ ✓ Compiled in 683ms (1057 modules)
+ GET / 200 in 100ms
+ ✓ Compiled in 847ms (1057 modules)
+ GET / 200 in 130ms
+ ✓ Compiled in 467ms (1057 modules)
+ GET / 200 in 84ms
+ GET / 200 in 370ms
+ ○ Compiling /api/attendance ...
+ ✓ Compiled /api/attendance in 1332ms (562 modules)
+ ✓ Compiled (566 modules)
+✓ Database connected successfully
+ GET /api/employees 200 in 1830ms
+ GET /api/projects 200 in 1819ms
+ GET /api/attendance?date=2025-12-30 200 in 1819ms
+ GET /api/employees 200 in 38ms
+ GET /api/projects 200 in 38ms
+ ✓ Compiled /api/assignments in 181ms (568 modules)
+✓ Database connected successfully
+ GET /api/projects 200 in 434ms
+ GET /api/employees 200 in 450ms
+ GET /api/assignments 200 in 454ms
+ GET /api/attendance?startDate=2025-12-01&endDate=2025-12-31 200 in 32ms
+ GET /api/projects 200 in 41ms
+ GET /api/employees 200 in 47ms
+ ✓ Compiled /api/payroll in 335ms (570 modules)
+✓ Database connected successfully
+ GET /api/payroll?month=12&year=2025 200 in 578ms
+ GET /api/projects 200 in 576ms
+ GET /api/employees 200 in 580ms
+ ✓ Compiled /api/social-charges/ledger in 210ms (572 modules)
+✓ Database connected successfully
+ GET /api/projects 200 in 449ms
+ GET /api/social-charges/ledger?month=12&year=2025 200 in 451ms
+ GET /api/employees 200 in 458ms
+ ✓ Compiled in 1849ms (1057 modules)
+ GET / 200 in 196ms

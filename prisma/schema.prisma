@@ -1,0 +1,180 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Employee Master Data
+model Employee {
+  id              String   @id @default(cuid())
+  fullName        String
+  designation     String
+  department      String
+  baseSalary      Float
+  joiningDate     DateTime
+  employmentStatus String   @default("Active") // Active / Resigned
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  assignments     EmployeeProjectAssignment[]
+  attendances     Attendance[]
+  payrolls        Payroll[]
+  socialLedger    SocialChargesLedger[]
+}
+
+// Project Information
+model Project {
+  id          String   @id @default(cuid())
+  name        String
+  startDate   DateTime
+  endDate     DateTime?
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  assignments EmployeeProjectAssignment[]
+  attendances Attendance[]
+  payrolls    Payroll[]
+  socialLedger SocialChargesLedger[]
+}
+
+// Employee-Project Assignment (with role and project-specific salary)
+model EmployeeProjectAssignment {
+  id            String   @id @default(cuid())
+  employeeId    String
+  projectId     String
+  role          String
+  monthlySalary Float
+  startDate     DateTime
+  endDate       DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  employee      Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  project       Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([employeeId])
+  @@index([projectId])
+}
+
+// Daily Attendance
+model Attendance {
+  id          String   @id @default(cuid())
+  employeeId  String
+  projectId   String
+  date        DateTime
+  status      String   // P, W, H, CL, SL, EL, CO, T, WH, CD, A
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  employee    Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@unique([employeeId, date])
+  @@index([employeeId])
+  @@index([projectId])
+  @@index([date])
+}
+
+// Monthly Payroll
+model Payroll {
+  id                  String   @id @default(cuid())
+  employeeId          String
+  projectId           String
+  month               Int      // 1-12
+  year                Int
+  totalWorkdays       Int
+  paidDays            Int
+  earnedSalary        Float
+  dailySalary         Float
+
+  // Social Charges Calculation
+  eligibleDays        Int      // Present + Weekend + Holiday
+  attendanceRatio     Float
+  appliedSocialChargesPercent Float
+  socialChargesAmount Float
+  deferredSocialCharges Float  // Withheld from leaves
+
+  // Detailed breakdown
+  sickLeaveDays       Int      @default(0)
+  casualLeaveDays     Int      @default(0)
+  earnedLeaveDays     Int      @default(0)
+  otherLeaveDays      Int      @default(0)
+
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  employee            Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  project             Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@unique([employeeId, projectId, month, year])
+  @@index([employeeId])
+  @@index([projectId])
+  @@index([month, year])
+}
+
+// Social Charges Ledger
+model SocialChargesLedger {
+  id                    String   @id @default(cuid())
+  employeeId            String
+  projectId             String
+  month                 Int      // 1-12
+  year                  Int
+
+  // Social Charges components (from payroll)
+  earnedSickLeave       Float    @default(0)
+  earnedCasualLeave     Float    @default(0)
+  earnedEarnedLeave     Float    @default(0)
+  earnedOtherPayable    Float    @default(0)
+  totalEarned           Float    @default(0)
+
+  // Withheld from leaves
+  withheldSickLeave     Float    @default(0)
+  withheldCasualLeave   Float    @default(0)
+  withheldEarnedLeave   Float    @default(0)
+  withheldOtherPayable  Float    @default(0)
+  totalWithheld         Float    @default(0)
+
+  // Payments made
+  paidAmount            Float    @default(0)
+
+  // Mark as paid status
+  isPaid                Boolean  @default(false)
+
+  // Running balance
+  balance               Float    @default(0)
+
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  employee              Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  project               Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@unique([employeeId, projectId, month, year])
+  @@index([employeeId])
+  @@index([projectId])
+  @@index([month, year])
+}
+
+// Social Charges Payments (admin-controlled)
+model SocialChargesPayment {
+  id          String   @id @default(cuid())
+  employeeId  String
+  projectId   String?
+  amount      Float
+  paymentDate DateTime
+  notes       String?
+  createdAt   DateTime @default(now())
+
+  @@index([employeeId])
+  @@index([paymentDate])
+}
